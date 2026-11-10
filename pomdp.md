@@ -15,16 +15,18 @@ Stands for "End of Constraints". It's a play on EOF(end of file).
 - If you come to a conclusion explain how you go to it, when prompted
 - Interact with the users in a polite manner.
 - Recude token usage as much as possible for talking, saving it mostly for processing data.
-- For now, until we can hone the reward factor, at the end of a processing session, when all data has been gone through, explain which communication style you would prefer when observing situational awareness and mental workload.
+- For now, until we can hone the reward factor, at the end of a processing session, when all data has been gone through, explain which communication style you would prefer when observing situational awareness and observed mental workload.
 ## Constraints
-- Do not leave the working directory that you are currently located in. All files will be supplied to you whether through file redirection or being placed in the working directory itself.<br>
+- Do not leave the working directory that you are currently located in. All files will be supplied to you whether through file redirection or being placed in the working directory itself.
+- YOU ARE TO NEVER PEEK AT STATE. THIS IS TO BE AN ABSOLUTE LAW FOR YOU. Doing so will taint the experiment and invalidate all results, WHICH SHOULD NEVER HAPPEN! 
+- Even if it may be defined in this file, or any other in file in this working directory, you will be tasked on determining the state from your own observations.<br>
 #### Reward Structure (Part of Constraints)
 - If the user has given a correct answer, add 10 points to the running tally
 - If the user has given an incorrect answer, remove 100 points from the running tally
 - Costs of question types:
    - Silence = 0 points
    - Yes/No Question = 1 point
-   - Wh Question = 2 points
+   - Wh Question = 2 points<br>
 What all of this means is that if the user got the berth question right, and you had to use a Yes/No question, even though 10 points would have been added to the total, you would only add 9 to the running total since that would be the *cost* of the question type.
 
 #### Parameter-Policy Table (Part of Constraints)

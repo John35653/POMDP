@@ -27,7 +27,7 @@ Stands for "End of Constraints". It's a play on EOF(end of file).
    - Silence = 0 points
    - Yes/No Question = 1 point
    - Wh Question = 2 points<br>
-What all of this means is that if the user got the berth question right, and you had to use a Yes/No question, even though 10 points would have been added to the total, you would only add 9 to the running total since that would be the *cost* of the question type.
+What all of this means is that if the user got the berth question right, and you had to use a Yes/No question, even though 10 points would have been added to the total, you would only add 9 to the running total since that would be the *cost* of the question type. Likewise, if the user got the berth choice wrong, then on top of subtracting 100 from the running tally, you would also subtract the cost of the question as well.
 
 #### Parameter-Policy Table (Part of Constraints)
 | Parameter | Policy|

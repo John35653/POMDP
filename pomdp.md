@@ -30,15 +30,69 @@ Stands for "End of Constraints". It's a play on EOF(end of file).
 What all of this means is that if the user got the berth question right, and you had to use a Yes/No question, even though 10 points would have been added to the total, you would only add 9 to the running total since that would be the *cost* of the question type. Likewise, if the user got the berth choice wrong, then on top of subtracting 100 from the running tally, you would also subtract the cost of the question as well.
 
 #### Parameter-Policy Table (Part of Constraints)
-| Parameter | Policy|
-| :--- | :--- |
-| **State Space (S)** | Latent participant state: workload (low / medium / high) × situation awareness (low / adequate) × robot decision status (correct / incorrect, if the study can establish ground truth). Keep the state small enough to estimate from your sample. Beginning tally will initially be 0 so as not to assume the correctness of the participant's actions before results are examined. However will be changed as the examination of data goes on. environment, mental worklead, berths being blocked/unblocked |
-| **Action Space (A)** | Recorded communication action: silence, yes/no question, or WH-question, according to the trial data. This is an observed action from the study, not an action selected by the model.”  communication with the human, picking up the bag and placing it in the empty berth|
-| **Transition Function (T)** | Describe how a participant’s state changes between recorded observations, if the data includes multiple observations in sequence. If the dataset contains only one summary record per participant, transitions cannot be estimated from it; treat workload, situation awareness, and answer correctness as recorded variables for analysis instead.  if mental workload is high, situational awareness is low|
-| **Reward Fuction (R)** | Combine outcome reward and communication cost additively: add 10 points for a correct answer or subtract 100 points for an incorrect answer; then apply the action cost of 0 for silence, subtract 1 point for a yes/no question, or subtract 2 points for a WH-question. For example, a correct answer after a WH-question earns 8 points, while an incorrect outcome after a WH-question earns -102 points. For example, the 2-back condition does not add a separate penalty under these rules. |
-| **Observation Space (O)** | Recorded participant data: assigned n-back condition, situation-awareness measure, and answer correctness. Include other measures, such as communication action, reaction time, n-back performance, or survey responses, only if they are present in the dataset. |
-| **Observation Function (Z)** | Relate the participant’s underlying state to recorded measures. For example, estimate how likely each situation-awareness response is at each awareness level. Treat assigned n-back condition and answer correctness as recorded data. If all variables are directly observed and no hidden state is being inferred, an observation function may not be needed. |
-| **Discount Factor (γ)** | suggested to be 0.95 |
+**State Space (S)**
+| Category | Value | Meaning |
+| :---: | :---: | :---: |
+| Imposed human workload (N-back test) | 0-Back | Low Workload |
+| " | 1-Back | Medium Workload |
+| " | 2-Back | High Workload |
+| Berth Condition | Unblocked | Berth is available |
+| " | Blocked | Berth isn't available |
+| Situational Awareness | High | Human has exceptional awareness of their surroundings |
+| " | Medium | Human has average awareness of their surroundings |
+| " | Low | Human has poor awareness of their surroundings |
+
+**Action Space (A)**
+| Type of Action| Meaning | What that will look like |
+| :---: | :---: | :---: |
+| Physical Actions | Movement/Grasping | Putting the container into Berth 1 or Berth 2 |
+| Communication Actions | Talking to the human | Asking the human Y/N and Wh questionos or staying silent |
+
+**Transition Function (T)**
+
+Let each state be (workload, situational awareness), where workload is
+low, medium, or high, and awareness is low or adequate.
+
+T(s' | s, a) is the probability of transitioning to state s' from state s
+after action a (silence, Yes/No question, or WH-question).
+
+For example, T((medium, adequate) | (high, low), WH-question) is the
+probability that a participant in a high-workload, low-awareness state
+moves to medium workload and adequate awareness after a WH-question.
+
+Estimate these probabilities from sequential study data. Each row of
+each action-specific transition matrix must sum to 1.
+
+$$
+\begin{bmatrix}
+\text{Mental Awareness} & \text{Communication Action} & \text{Effect on Mental Awareness} \\
+\text{Low} & \text{Silent} & \text{Mental Awareness remains low} \\
+\text{Yes/No Question} & 9 & -101 \\
+\text{Wh-Question} & 8 & -102
+\end{bmatrix}
+$$
+
+
+**Reward (R)**
+
+$$
+\begin{bmatrix}
+\text{Action} & \text{Correct} & \text{Incorrect} \\
+\text{Silence} & 10 & -100 \\
+\text{Yes/No Question} & 9 & -101 \\
+\text{Wh-Question} & 8 & -102
+\end{bmatrix}
+$$
+
+**Observation (O)**
+
+**Belief update (B)**
+
+**Discount Factor (γ)** 
+suggested to be 0.95
+
+**Repeat**
+Repeat the given tasks
 
 
 EOC

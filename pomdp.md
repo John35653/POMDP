@@ -66,9 +66,15 @@ each action-specific transition matrix must sum to 1.
 $$
 \begin{bmatrix}
 \text{Mental Awareness} & \text{Communication Action} & \text{Effect on Mental Awareness} \\
-\text{Low} & \text{Silent} & \text{Mental Awareness remains low} \\
-\text{Yes/No Question} & 9 & -101 \\
-\text{Wh-Question} & 8 & -102
+\text{Low} & \text{Silent} & \text{N/A} \\
+\text{"} & \text{Yes/No Question} & \text{N/A} \\
+\text{"} & \text{Wh- Question} & \text{N/A} \\
+\text{Medium} & \text{Silent} & \text{N/A} \\
+\text{"} & \text{Yes/No Question} & \text{N/A} \\
+\text{"} & \text{Wh- Question} & \text{N/A} \\
+\text{High} & \text{Silent} & \text{N/A} \\
+\text{"} & \text{Yes/No Question} & \text{N/A} \\
+\text{"} & \text{Wh- Question} & \text{N/A} \\
 \end{bmatrix}
 $$
 

@@ -16,10 +16,22 @@
 #### Physical action:
 - Placing the container in the designated berth
 #### Communication action:
-- Asking a Yes/No question
-- Asking a Wh type question
+- Telling the human what berth is blocked.
+- Communicate this to this user by:
+    - Staying silent and doing it yourself
+    - Asking a Yes/No question
+    - Asking a Wh type question
 ## Transition:
 ## Reward:
+$$
+\begin{bmatrix}
+Action & Correct & Incorrect \\
+Silence & 10 & -100 \\
+Yes/No Question & 9 & -101 \\
+Wh-Question & 8 & -102
+\end{bmatrix}
+$$
 ## Observation:
 ## Belief Update:
 ## Repeat
+
